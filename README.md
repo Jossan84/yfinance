@@ -48,8 +48,6 @@ Yahoo! finance API is intended for personal use only.**
 
 The `Ticker` module, which allows you to access ticker data in a more Pythonic way:
 
-Note: yahoo finance datetimes are received as UTC.
-
 ```python
 import yfinance as yf
 
@@ -187,6 +185,11 @@ data = yf.download(  # or pdr.get_data_yahoo(...
         # (optional, default is '1d')
         interval = "1m",
 
+        # Whether to ignore timezone when aligning ticker data from 
+        # different timezones. Default is True. False may be useful for 
+        # minute/hourly data.
+        ignore_tz = False,
+
         # group by ticker (to access via data['SPY'])
         # (optional, default is 'column')
         group_by = 'ticker',
@@ -194,6 +197,9 @@ data = yf.download(  # or pdr.get_data_yahoo(...
         # adjust all OHLC automatically
         # (optional, default is False)
         auto_adjust = True,
+
+        # identify and attempt repair of currency unit mixups e.g. $/cents
+        repair = False,
 
         # download pre/post regular market hours data
         # (optional, default is False)
@@ -207,6 +213,18 @@ data = yf.download(  # or pdr.get_data_yahoo(...
         # (optional, default is None)
         proxy = None
     )
+```
+
+### Timezone cache store
+
+When fetching price data, all dates are localized to stock exchange timezone. 
+But timezone retrieval is relatively slow, so yfinance attemps to cache them 
+in your users cache folder. 
+You can direct cache to use a different location with `set_tz_cache_location()`:
+```python
+import yfinance as yf
+yf.set_tz_cache_location("custom/cache/location")
+...
 ```
 
 ### Managing Multi-Level Columns
@@ -264,6 +282,7 @@ To install `yfinance` using `conda`, see
 -   [Numpy](http://www.numpy.org) \>= 1.11.1
 -   [requests](http://docs.python-requests.org/en/master/) \>= 2.14.2
 -   [lxml](https://pypi.org/project/lxml/) \>= 4.5.1
+-   [appdirs](https://pypi.org/project/appdirs) \>=1.4.4
 
 ### Optional (if you want to use `pandas_datareader`)
 

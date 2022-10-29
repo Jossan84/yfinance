@@ -1,6 +1,44 @@
 Change Log
 ===========
 
+0.2.0rc1
+------
+Jumping to 0.2 for this big update. 0.1.* will continue to receive bug-fixes
+- timezone cache performance massively improved. Thanks @fredrik-corneliusson #1113 #1112 #1109 #1105 #1099
+- price repair feature #1110
+- fix merging of dividends/splits with prices #1069 #1086 #1102
+- fix Yahoo returning latest price interval across 2 rows #1070
+- optional: raise errors as exceptions: raise_errors=True #1104
+- add proper unit tests #1069
+
+0.1.81
+------
+- Fix unhandled tz-cache exception #1107
+
+0.1.80
+------
+- Fix `download(ignore_tz=True)` for single ticker #1097
+- Fix rare case of error "Cannot infer DST time" #1100
+
+0.1.79
+------
+- Fix when Yahoo returns price=NaNs on dividend day
+
+0.1.78
+------
+- Fix download() when different timezones #1085
+
+0.1.77
+------
+- Fix user experience bug #1078
+
+0.1.75
+------
+- Fixed datetime-related issues: #1048
+- Add 'keepna' argument #1032
+- Speedup Ticker() creation #1042
+- Improve a bugfix #1033
+
 0.1.74
 ------
 - Fixed bug introduced in 0.1.73 (sorry :/)
